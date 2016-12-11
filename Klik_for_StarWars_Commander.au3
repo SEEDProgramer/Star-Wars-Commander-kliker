@@ -43,7 +43,7 @@ While($i<2000) ; jak narazie klika 2000 razy do czasu opracowania gorącego klaw
 	While ($a > 0)
 		$aMgp = MouseGetPos()
 		; Display a tooltip near the cursor with its coords.
-		If $a < 3000 Then ToolTip("SW_Col to go " & $a , $aMgp[0] + 10, $aMgp[1] + 10)
+		If $a < 5000 Then ToolTip("SW_Col to go " & $a , $aMgp[0] + 10, $aMgp[1] + 10) ; wyświetlamy informację na 5 s przed zadziałaniem klikacza
 		Sleep(500)
 		$a = $a - 500
 	WEnd
