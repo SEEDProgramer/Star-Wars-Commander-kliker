@@ -42,16 +42,17 @@ While($i<2000) ; jak narazie klika 2000 razy do czasu opracowania gorącego klaw
 	Local $a = 180000 ;3 minuty
 	While ($a > 0)
 		;WinSetTitle ("Star Wars: Commander","","Star Wars: Commander Collector is runing !!! Time to start: " & $a)
-		If WinActive("Star Wars: Commander") Then
-		Else
-			If $a < 5000 Then
-				$aMgp = MouseGetPos()
-				; Display a tooltip near the cursor with its coords.
-				ToolTip("SW_Col to go " & $a , $aMgp[0] + 10, $aMgp[1] + 10) ; wyświetlamy informację na 5 s przed zadziałaniem klikacza jezeli okno gry nie jrst aktywne
-			Else
-				ToolTip("")
-			EndIf
-		EndIf
+		;If WinActive("Star Wars: Commander") Then
+		ToolTip("Collector is runing !!! Time to start: " & $a,1017,744) ; powiadamianie na pasku
+		;Else
+		;	If $a < 5000 Then
+		;		$aMgp = MouseGetPos()
+		;		; Display a tooltip near the cursor with its coords.
+		;		ToolTip("SW_Col to go " & $a , $aMgp[0] + 10, $aMgp[1] + 10) ; wyświetlamy informację na 5 s przed zadziałaniem klikacza jezeli okno gry nie jrst aktywne
+		;	Else
+		;		ToolTip("")
+		;	EndIf
+		;EndIf
 		Sleep(500)
 		$a = $a - 500
 	WEnd
