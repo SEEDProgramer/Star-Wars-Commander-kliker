@@ -35,7 +35,7 @@ EndIf
 Local $i = 0
 Local $aMgp = 0
 While($i<2000) ; jak narazie klika 2000 razy do czasu opracowania gorącego klawisza działa 100godzin
-	ToolTip("Collector is runing " & $i & " times!!! Now is hunting time",817,744) ; powiadamianie na pasku
+	ToolTip("Collector is runing " & $i & " times!!! Now is hunting time",837,744) ; powiadamianie na pasku
 	CollectAll()
 	;MsgBox($MB_SYSTEMMODAL, "", "Value of $i is: " & $i)
 	$i = $i + 1
@@ -44,15 +44,15 @@ While($i<2000) ; jak narazie klika 2000 razy do czasu opracowania gorącego klaw
 	While ($a > 0)
 		;WinSetTitle ("Star Wars: Commander","","Star Wars: Commander Collector is runing !!! Time to start: " & $a)
 		;If WinActive("Star Wars: Commander") Then
-		ToolTip("Collector is runing " & $i & " times!!! Time to next collect: " & $a,817,744) ; powiadamianie na pasku
+
 		;Else
-		;	If $a < 5000 Then
-		;		$aMgp = MouseGetPos()
-		;		; Display a tooltip near the cursor with its coords.
-		;		ToolTip("SW_Col to go " & $a , $aMgp[0] + 10, $aMgp[1] + 10) ; wyświetlamy informację na 5 s przed zadziałaniem klikacza jezeli okno gry nie jrst aktywne
-		;	Else
-		;		ToolTip("")
-		;	EndIf
+			If $a < 5000 Then
+				$aMgp = MouseGetPos()
+				; Display a tooltip near the cursor with its coords.
+				ToolTip("SW_Col to go " & $a , $aMgp[0] + 10, $aMgp[1] + 10) ; wyświetlamy informację na 5 s przed zadziałaniem klikacza
+			Else
+				ToolTip("Collector is runing " & $i & " times!!! Time to next collect: " & $a,837,744) ; powiadamianie na pasku
+			EndIf
 		;EndIf
 		Sleep(500)
 		$a = $a - 500
