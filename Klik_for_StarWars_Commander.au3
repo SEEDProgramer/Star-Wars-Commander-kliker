@@ -41,9 +41,8 @@ While($i<2000) ; jak narazie klika 2000 razy do czasu opracowania gorącego klaw
 	; Assign a Local variable the coords the cursor (array).
 	Local $a = 180000 ;3 minuty
 	While ($a > 0)
-
+		;WinSetTitle ("Star Wars: Commander","","Star Wars: Commander Collector is runing !!! Time to start: " & $a)
 		If WinActive("Star Wars: Commander") Then
-			ToolTip("Collector is runing !!! Time to start: " & $a,336,38) ; na razie tak na sztywno ustawiam
 		Else
 			If $a < 5000 Then
 				$aMgp = MouseGetPos()
