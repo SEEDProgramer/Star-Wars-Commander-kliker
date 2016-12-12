@@ -98,7 +98,7 @@ Func CollectAll()
 EndFunc
 Func Collect($vX = 0, $vY = 0)
 	MouseClick($MOUSE_CLICK_LEFT,$vX,$vY) ; gold 1
-	Sleep(500) ; delay między klikami zeby gra zdazyła zatrybic
+	Sleep(100) ; delay między klikami zeby gra zdazyła zatrybic
 EndFunc
 
 ; Finished!
