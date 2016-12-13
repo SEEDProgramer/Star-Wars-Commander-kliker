@@ -37,6 +37,7 @@ Local $aMgp = 0
 While($i<2000) ; jak narazie klika 2000 razy do czasu opracowania gorącego klawisza działa 100godzin
 	ToolTip("Collector is runing " & $i & " times!!! Now is hunting time",837,744) ; powiadamianie na pasku
 	CollectAll()
+	MouseClick($MOUSE_CLICK_LEFT,100,1) ; aby ukryć okno z grą
 	;MsgBox($MB_SYSTEMMODAL, "", "Value of $i is: " & $i)
 	$i = $i + 1
 	; Assign a Local variable the coords the cursor (array).
@@ -60,6 +61,7 @@ While($i<2000) ; jak narazie klika 2000 razy do czasu opracowania gorącego klaw
 	ToolTip("") ; Ukrywa informacje
 	;Sleep(180000) ;3 minuty
 WEnd
+
 ; Now quit by sending a "close" request to the calculator window using the classname
 ;WinClose("[CLASS:CalcFrame]")
 
