@@ -12,8 +12,14 @@
 ; Zbieraz zloto i metal i zapobiega wylogowaniu z powodu braku aktywności
 ; Jezeli skrypt ma nie działać wystarczy ze powiększymy grę na cały ekran (bez belki)
 
+Global $g_bPaused = False
+
+HotKeySet("{PAUSE}", "HotKeyPressed")
+HotKeySet("{ESC}", "HotKeyPressed")
+HotKeySet("+!p", "HotKeyPressed") ; Shift-Alt-p
+
 ; Prompt the user to run the script - use a Yes/No prompt with the flag parameter set at 4 (see the help file for more details)
-Local $iAnswer = MsgBox(BitOR($MB_YESNO, $MB_SYSTEMMODAL), "Star Wars Commander", "This is a gold and aloy collektor.  Do you want to run it?")
+Local $iAnswer = MsgBox(BitOR($MB_YESNO, $MB_SYSTEMMODAL), "Star Wars Commander", "This is a gold and aloy collektor.Press Shift-Alt-p for pause, ECS to terminate.  Do you want to run it?")
 
 ; Check the user's answer to the prompt (see the help file for MsgBox return values)
 ; If "No" was clicked (7) then exit the script
@@ -103,4 +109,23 @@ Func Collect($vX = 0, $vY = 0)
 	Sleep(100) ; delay między klikami zeby gra zdazyła zatrybic
 EndFunc
 
+; Obsluga hotkeyow (pauza i zakończenie)
+Func HotKeyPressed()
+	Switch @HotKeyPressed ; The last hotkey pressed.
+		Case "+!p" ; String is the {PAUSE} hotkey.
+			$g_bPaused = Not $g_bPaused
+			While $g_bPaused
+				Sleep(100)
+				ToolTip('Script is "Paused"', 837,744)
+			WEnd
+			ToolTip("")
+
+		Case "{ESC}" ; String is the {ESC} hotkey.
+			Exit
+
+		Case "+!d" ; String is the Shift-Alt-d hotkey.
+			;MsgBox($MB_SYSTEMMODAL, "", "This is a message.")
+
+	EndSwitch
+EndFunc   ;==>HotKeyPressed
 ; Finished!
