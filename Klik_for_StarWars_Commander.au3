@@ -116,7 +116,7 @@ Func HotKeyPressed()
 			$g_bPaused = Not $g_bPaused
 			While $g_bPaused
 				Sleep(100)
-				ToolTip('Script is "Paused"', 837,744)
+				ToolTip("Collector is runing " & $i & " times !!! Script is Paused", 837,744)
 			WEnd
 			ToolTip("")
 
