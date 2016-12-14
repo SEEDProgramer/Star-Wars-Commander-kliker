@@ -13,6 +13,7 @@
 ; Jezeli skrypt ma nie działać wystarczy ze powiększymy grę na cały ekran (bez belki)
 
 Global $g_bPaused = False
+Global $wHandle = 0
 
 HotKeySet("+!f", "HotKeyPressed")
 HotKeySet("+!q", "HotKeyPressed")
@@ -43,8 +44,9 @@ Local $aMgp = 0
 While($i<2000) ; jak narazie klika 2000 razy do czasu opracowania gorącego klawisza działa 100godzin
 	ToolTip("Collector is runing " & $i & " times!!! Now is hunting time",837,744) ; powiadamianie na pasku
 	;MouseClick($MOUSE_CLICK_LEFT,1194,86) ; klikamy gdyby gra byłą na innej planszy niz mapa bazy
+	$wHandle=TopWindow()
 	CollectAll()
-
+	WinActivate($wHandle)
 	;MsgBox($MB_SYSTEMMODAL, "", "Value of $i is: " & $i)
 	$i = $i + 1
 	; Assign a Local variable the coords the cursor (array).
@@ -76,6 +78,7 @@ WEnd
 ;WinWaitClose("[CLASS:CalcFrame]")
 Func CollectAll()
 	;WinActive
+	TopWindow()
 	WinActivate("Star Wars: Commander")
 	WinWaitActive("Star Wars: Commander")
 	Collect(582,146) ;gold1
@@ -118,9 +121,9 @@ Local $r = 0
 	; Loop through the array displaying only visable windows with a title.
 	For $i = 1 To $aList[0][0]
         If $aList[$i][0] <> "" And BitAND(WinGetState($aList[$i][1]), 2) Then
-            MsgBox($MB_SYSTEMMODAL, "", "Title: " & $aList[$i][0] & @CRLF & "Handle: " & $aList[$i][1] & "Count: " & $r)
+            ;MsgBox($MB_SYSTEMMODAL, "", "Title: " & $aList[$i][0] & @CRLF & "Handle: " & $aList[$i][1] & "Count: " & $r)
 			$r=$r+1
-			;ExitLoop
+			if $r>1 then Return($aList[$i][1])
         EndIf
 	Next
 EndFunc
