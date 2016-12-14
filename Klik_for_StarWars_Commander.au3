@@ -44,7 +44,7 @@ Local $aMgp = 0
 While($i<2000) ; jak narazie klika 2000 razy do czasu opracowania gorącego klawisza działa 100godzin
 	ToolTip("Collector is runing " & $i & " times!!! Now is hunting time",837,744) ; powiadamianie na pasku
 	;MouseClick($MOUSE_CLICK_LEFT,1194,86) ; klikamy gdyby gra byłą na innej planszy niz mapa bazy
-	$wHandle=TopWindow()
+	;$wHandle=TopWindow()
 	CollectAll()
 	WinActivate($wHandle)
 	;MsgBox($MB_SYSTEMMODAL, "", "Value of $i is: " & $i)
@@ -77,8 +77,10 @@ WEnd
 ; Now wait for the calculator to close before continuing
 ;WinWaitClose("[CLASS:CalcFrame]")
 Func CollectAll()
+
+	$wHandle=TopWindow() ; odczytujemy aktywne okno
 	;WinActive
-	TopWindow()
+	;TopWindow()
 	WinActivate("Star Wars: Commander")
 	WinWaitActive("Star Wars: Commander")
 	Collect(582,146) ;gold1
@@ -91,7 +93,8 @@ Func CollectAll()
 	Collect(457,450) ;aloy3
 	Collect(524,485) ;aloy4
 	Collect(895,536) ;aloy5
-	MouseClick($MOUSE_CLICK_LEFT,100,1) ; aby ukryć okno z grą mało eleganckie rozwiązanie
+	;MouseClick($MOUSE_CLICK_LEFT,100,1) ; aby ukryć okno z grą mało eleganckie rozwiązanie
+	WinActivate($wHandle) ; Przywracamy ostanio uywane okno
 	;MouseClick($MOUSE_CLICK_LEFT,582,146) ; gold 1
 	;Sleep($iMmousedelay)
 	;MouseClick($MOUSE_CLICK_LEFT,499,170) ; gold 2
@@ -142,9 +145,9 @@ Func HotKeyPressed()
 			Exit
 
 		Case "+!f" ; String is the Shift-Alt-f hotkey.
-			TopWindow()
+			;TopWindow()
 			CollectAll()
-			MouseClick($MOUSE_CLICK_LEFT,100,1) ; aby ukryć okno z grą
+			;MouseClick($MOUSE_CLICK_LEFT,100,1) ; aby ukryć okno z grą
 			;MsgBox($MB_SYSTEMMODAL, "", "This is a message.")
 
 	EndSwitch
