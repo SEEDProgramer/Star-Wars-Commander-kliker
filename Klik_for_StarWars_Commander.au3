@@ -42,8 +42,9 @@ Local $i = 0
 Local $aMgp = 0
 While($i<2000) ; jak narazie klika 2000 razy do czasu opracowania gorącego klawisza działa 100godzin
 	ToolTip("Collector is runing " & $i & " times!!! Now is hunting time",837,744) ; powiadamianie na pasku
+	;MouseClick($MOUSE_CLICK_LEFT,1194,86) ; klikamy gdyby gra byłą na innej planszy niz mapa bazy
 	CollectAll()
-	MouseClick($MOUSE_CLICK_LEFT,100,1) ; aby ukryć okno z grą
+
 	;MsgBox($MB_SYSTEMMODAL, "", "Value of $i is: " & $i)
 	$i = $i + 1
 	; Assign a Local variable the coords the cursor (array).
@@ -74,6 +75,7 @@ WEnd
 ; Now wait for the calculator to close before continuing
 ;WinWaitClose("[CLASS:CalcFrame]")
 Func CollectAll()
+	;WinActive
 	WinActivate("Star Wars: Commander")
 	WinWaitActive("Star Wars: Commander")
 	Collect(582,146) ;gold1
@@ -86,6 +88,7 @@ Func CollectAll()
 	Collect(457,450) ;aloy3
 	Collect(524,485) ;aloy4
 	Collect(895,536) ;aloy5
+	MouseClick($MOUSE_CLICK_LEFT,100,1) ; aby ukryć okno z grą mało eleganckie rozwiązanie
 	;MouseClick($MOUSE_CLICK_LEFT,582,146) ; gold 1
 	;Sleep($iMmousedelay)
 	;MouseClick($MOUSE_CLICK_LEFT,499,170) ; gold 2
@@ -107,8 +110,20 @@ EndFunc
 Func Collect($vX = 0, $vY = 0)
 	MouseClick($MOUSE_CLICK_LEFT,$vX,$vY) ; gold 1
 	Sleep(100) ; delay między klikami zeby gra zdazyła zatrybic
-EndFunc
+EndFunc; Retrieve a list of window handles.
+Func TopWindow() ; Wykrywa aktywne okno
+Local $aList = WinList()
+Local $r = 0
 
+	; Loop through the array displaying only visable windows with a title.
+	For $i = 1 To $aList[0][0]
+        If $aList[$i][0] <> "" And BitAND(WinGetState($aList[$i][1]), 2) Then
+            MsgBox($MB_SYSTEMMODAL, "", "Title: " & $aList[$i][0] & @CRLF & "Handle: " & $aList[$i][1] & "Count: " & $r)
+			$r=$r+1
+			;ExitLoop
+        EndIf
+	Next
+EndFunc
 ; Obsluga hotkeyow (pauza i zakończenie)
 Func HotKeyPressed()
 	Switch @HotKeyPressed ; The last hotkey pressed.
@@ -124,6 +139,7 @@ Func HotKeyPressed()
 			Exit
 
 		Case "+!f" ; String is the Shift-Alt-f hotkey.
+			TopWindow()
 			CollectAll()
 			MouseClick($MOUSE_CLICK_LEFT,100,1) ; aby ukryć okno z grą
 			;MsgBox($MB_SYSTEMMODAL, "", "This is a message.")
